@@ -74,6 +74,8 @@ func _process(_delta):
 		$ScoreLabel.text = "Score: %d" % score
 	if $LivesLabel:
 		$LivesLabel.text = "Lives: %d" % lives
+	if $SpeedLabel:
+		$SpeedLabel.text = "Speed: %d" % word_speed
 
 	if lives <= 0:
 		game_over()
@@ -93,6 +95,12 @@ func spawn_word():
 func game_over():
 	$SpawnTimer.stop()
 	set_process(false)
+	set_process_input(false)
+	
+	for child in get_children():
+		if child is Node2D and child.has_method("_process"):
+			child.set_process(false)
+	
 	if $GameOverLabel:
 		$GameOverLabel.text = "Game Over!\nScore: %d" % score
 		$GameOverLabel.visible = true
