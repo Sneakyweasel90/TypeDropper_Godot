@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8hgxnll1bhc8"]
+
+[ext_resource type="Script" uid="uid://clss02w4br0bq" path="res://Typedropper.gd" id="1_wmkbq"]
+[ext_resource type="PackedScene" uid="uid://b66qrlaaoco3e" path="res://FallingWords.tscn" id="2_fbj80"]
+
+[node name="TypeDropper" type="Node2D"]
+script = ExtResource("1_wmkbq")
+word_scene = ExtResource("2_fbj80")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 78.0
+offset_bottom = 29.0
+text = "Score = 0"
+
+[node name="LivesLabel" type="Label" parent="."]
+offset_left = 520.0
+offset_top = 6.0
+offset_right = 586.0
+offset_bottom = 29.0
+text = "Lives = 3"
+
+[node name="InputLabel" type="Label" parent="."]
+offset_left = 250.0
+offset_top = 547.0
+offset_right = 372.0
+offset_bottom = 583.0
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 227.0
+offset_top = 231.0
+offset_right = 395.0
+offset_bottom = 365.0
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
