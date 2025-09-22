@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctpm5tdrl771f"]
+
+[ext_resource type="Script" uid="uid://d1bedmqvc54pv" path="res://MainMenu.gd" id="1_h7a2f"]
+[ext_resource type="PackedScene" uid="uid://b8hgxnll1bhc8" path="res://TypeDropper.tscn" id="2_qoqlk"]
+[ext_resource type="PackedScene" uid="uid://beyiun1uybt7k" path="res://Leaderboard.tscn" id="3_iwfq2"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 306.0
+offset_top = 282.0
+offset_right = 306.0
+offset_bottom = 282.0
+script = ExtResource("1_h7a2f")
+game_scene = ExtResource("2_qoqlk")
+leaderboard_scene = ExtResource("3_iwfq2")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = -136.0
+offset_top = -207.0
+offset_right = 128.0
+offset_bottom = -152.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Type Dropper"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -68.0
+offset_right = 178.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EasyBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Easy"
+
+[node name="MediumBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Medium"
+
+[node name="HardBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hard"
+
+[node name="LeaderboardBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Show Leaderboard"

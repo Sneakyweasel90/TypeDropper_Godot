@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b66qrlaaoco3e"]
 
-[ext_resource type="Script" uid="uid://m17um31naar" path="res://FallingWord.gd" id="1_04dwe"]
+[ext_resource type="Script" uid="uid://m17um31naar" path="res://FallingWord.gd" id="1_5cdlr"]
 
 [node name="FallingLetter" type="Node2D"]
-script = ExtResource("1_04dwe")
+script = ExtResource("1_5cdlr")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 6.0

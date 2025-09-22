@@ -1,24 +1,43 @@
 extends Node2D
 
-@export var speed: float = 100
+@export var speed: float = 80
 var word: String = ""
+var typed_length: int = 0
+
+var label: RichTextLabel
 
 func _ready():
-	var label = Label.new()
+	label = RichTextLabel.new()
+	label.bbcode_enabled = false
 	label.text = word
-	label.name = "WordLabel"
+	label.custom_minimum_size = Vector2(200, 30)
+	label.scroll_active = false
 	add_child(label)
 
 func _process(delta):
 	position.y += speed * delta
 
 	if position.y > 600:
-		if get_parent().has_variable("lives"):
-			get_parent().lives -= 1
+		if get_parent().has_method("decrease_life"):
+			get_parent().decrease_life()
 		queue_free()
 
 func check_word(input_text: String) -> bool:
-	if input_text == word.to_lower():
+	typed_length = 0
+	for i in range(min(input_text.length(), word.length())):
+		if input_text[i] == word[i].to_lower():
+			typed_length += 1
+		else:
+			break
+	
+	update_label_color()
+	
+	if typed_length == word.length() and input_text.length() >= word.length():
 		queue_free()
 		return true
 	return false
+
+func update_label_color():
+	var correct = word.substr(0, typed_length)
+	var remaining = word.substr(typed_length, word.length() - typed_length)
+	label.bbcode_text = "[color=green]%s[/color]%s" % [correct, remaining]

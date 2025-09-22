@@ -1,14 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8hgxnll1bhc8"]
 
 [ext_resource type="Script" uid="uid://clss02w4br0bq" path="res://Typedropper.gd" id="1_wmkbq"]
-[ext_resource type="PackedScene" uid="uid://b66qrlaaoco3e" path="res://FallingWords.tscn" id="2_fbj80"]
+[ext_resource type="PackedScene" uid="uid://b66qrlaaoco3e" path="res://FallingWord.tscn" id="2_fbj80"]
 
 [node name="TypeDropper" type="Node2D"]
 script = ExtResource("1_wmkbq")
 word_scene = ExtResource("2_fbj80")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="ScoreLabel" type="Label" parent="."]
 offset_left = 8.0

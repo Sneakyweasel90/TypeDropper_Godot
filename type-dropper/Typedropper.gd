@@ -1,55 +1,61 @@
 extends Node2D
 
 @export var word_scene: PackedScene
+@export var difficulty: String = "easy"
 
 var score: int = 0
 var lives: int = 3
 var words: Array = []
-var difficulty: String = "easy"
 var current_input: String = ""
 
 func _ready():
-	var path = "res://words/%s.txt" % difficulty
-	load_words(path)
-
-	$SpawnTimer.timeout.connect(spawn_word)
-	$SpawnTimer.start()
-
 	if $GameOverLabel:
 		$GameOverLabel.visible = false
-
 	if $InputLabel:
 		$InputLabel.text = ""
+
+	$SpawnTimer.timeout.connect(spawn_word)
+
+func setup(difficulty_choice: String):
+	difficulty = difficulty_choice
+	var path = "res://words/%s.txt" % difficulty
+	load_words(path)
+	$SpawnTimer.start()
 
 func load_words(path: String):
 	var file = FileAccess.open(path, FileAccess.READ)
 	if not file:
 		print("Failed to open file:", path)
 		return
-		
+	
 	var content = file.get_as_text()
 	file.close()
 	words.clear()
+
 	var split_words = content.split(",", false)
 	for w in split_words:
-		var cleaned = w.strip_edges()
-		cleaned = cleaned.replace('"', '')
+		var cleaned = w.strip_edges().replace('"', '')
 		if cleaned != "":
 			words.append(cleaned)
-		
+
 	print("Loaded words:", words)
 
 func _input(event):
-	if event is InputEventKey and event.pressed and event.unicode != 0:
-		var typed_char = char(event.unicode).to_lower()
-
-		current_input += typed_char
-		if $InputLabel:
-			$InputLabel.text = current_input
+	if event is InputEventKey and event.pressed:
+		if event.keycode == Key.KEY_BACKSPACE:
+			if current_input.length() > 0:
+				current_input = current_input.substr(0, current_input.length() - 1)
+				if $InputLabel:
+					$InputLabel.text = current_input
+		elif event.unicode != 0:
+			var typed_char = char(event.unicode).to_lower()
+			current_input += typed_char
+			if $InputLabel:
+				$InputLabel.text = current_input
 
 		for child in get_children():
 			if child.has_method("check_word") and child.check_word(current_input):
-				score += 1
+				score += 100
 				current_input = ""
 				if $InputLabel:
 					$InputLabel.text = ""
@@ -60,7 +66,6 @@ func _input(event):
 			if $InputLabel:
 				$InputLabel.text = ""
 
-
 func _process(_delta):
 	if $ScoreLabel:
 		$ScoreLabel.text = "Score: %d" % score
@@ -70,9 +75,9 @@ func _process(_delta):
 	if lives <= 0:
 		game_over()
 
-
 func spawn_word():
 	if not word_scene or words.is_empty():
+		print("Does it make it here?", word_scene)
 		return
 	var word_instance = word_scene.instantiate()
 	var word = words[randi() % words.size()]
@@ -81,11 +86,12 @@ func spawn_word():
 	word_instance.position = Vector2(x, 0)
 	add_child(word_instance)
 
-
 func game_over():
 	$SpawnTimer.stop()
 	set_process(false)
-
 	if $GameOverLabel:
 		$GameOverLabel.text = "Game Over!\nScore: %d" % score
 		$GameOverLabel.visible = true
+
+func decrease_life():
+	lives -= 1
