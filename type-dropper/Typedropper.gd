@@ -7,6 +7,8 @@ var score: int = 0
 var lives: int = 3
 var words: Array = []
 var current_input: String = ""
+var word_speed = 80
+var current_word: Node = null # Need to track the active word with this
 
 func _ready():
 	if $GameOverLabel:
@@ -14,7 +16,9 @@ func _ready():
 	if $InputLabel:
 		$InputLabel.text = ""
 
-	$SpawnTimer.timeout.connect(spawn_word)
+	var path = "res://words/%s.txt" % difficulty
+	load_words(path)
+	spawn_word()
 
 func setup(difficulty_choice: String):
 	difficulty = difficulty_choice
@@ -41,7 +45,10 @@ func load_words(path: String):
 	#print("Loaded words:", words)
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
+	if not current_word:
+		return
+	
+	if event is InputEventKey and event.is_pressed():
 		if event.keycode == Key.KEY_BACKSPACE:
 			if current_input.length() > 0:
 				current_input = current_input.substr(0, current_input.length() - 1)
@@ -52,19 +59,15 @@ func _input(event):
 			current_input += typed_char
 			if $InputLabel:
 				$InputLabel.text = current_input
-
-		for child in get_children():
-			if child.has_method("check_word") and child.check_word(current_input):
-				score += 100
-				current_input = ""
-				if $InputLabel:
-					$InputLabel.text = ""
-				break
-
-		if current_input.length() > 15:
+		
+		if current_word.has_method("check_word") and current_word.check_word(current_input):
+			score += 100
+			word_speed += 2
 			current_input = ""
 			if $InputLabel:
 				$InputLabel.text = ""
+			current_word = null
+			spawn_word()
 
 func _process(_delta):
 	if $ScoreLabel:
@@ -77,14 +80,15 @@ func _process(_delta):
 
 func spawn_word():
 	if not word_scene or words.is_empty():
-		print("Does it make it here?", word_scene)
 		return
 	var word_instance = word_scene.instantiate()
-	var word = words[randi() % words.size()]
-	word_instance.word = word
+	var word_text = words[randi() % words.size()]
+	word_instance.word = word_text
+	word_instance.speed = word_speed
 	var x = randf_range(50, 550)
 	word_instance.position = Vector2(x, 0)
 	add_child(word_instance)
+	current_word = word_instance
 
 func game_over():
 	$SpawnTimer.stop()

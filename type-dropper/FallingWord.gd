@@ -16,11 +16,18 @@ func _ready():
 
 func _process(delta):
 	position.y += speed * delta
+	var parent_node = get_parent()
 
 	if position.y > 600:
 		if get_parent().has_method("decrease_life"):
 			get_parent().decrease_life()
 		queue_free()
+		if get_parent().current_word == self:
+			get_parent().current_word = null
+			get_parent().current_input = ""
+			if parent_node.has_node("InputLabel"):
+				parent_node.get_node("InputLabel").text = ""
+			get_parent().spawn_word()
 
 func check_word(input_text: String) -> bool:
 	typed_length = 0
