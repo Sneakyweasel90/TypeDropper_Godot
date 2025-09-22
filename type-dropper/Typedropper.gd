@@ -38,7 +38,7 @@ func load_words(path: String):
 		if cleaned != "":
 			words.append(cleaned)
 
-	print("Loaded words:", words)
+	#print("Loaded words:", words)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
