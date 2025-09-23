@@ -8,7 +8,7 @@ func _ready():
 	#$TopScoreLabel.text = "Top Score: %d" % top_score #Used for later to grab leaderboard API
 
 func _on_retry_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://TypeDropper.tscn")
+	get_tree().change_scene_to_file("res://scenes/TypeDropper.tscn")
 
 func _on_main_menu_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

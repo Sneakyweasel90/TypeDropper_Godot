@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8hgxnll1bhc8"]
+[gd_scene load_steps=5 format=3 uid="uid://b8hgxnll1bhc8"]
 
 [ext_resource type="Script" uid="uid://clss02w4br0bq" path="res://scripts/Typedropper.gd" id="1_x1y4k"]
 [ext_resource type="PackedScene" uid="uid://b66qrlaaoco3e" path="res://scenes/FallingWord.tscn" id="2_bmg6r"]
 [ext_resource type="PackedScene" uid="uid://c74jkyyo01yaa" path="res://scenes/PauseMenu.tscn" id="3_uavyo"]
+[ext_resource type="AudioStream" uid="uid://d344c2pxb7ks6" path="res://assets/Music/Anime Beat Loop.ogg" id="4_bmg6r"]
 
 [node name="TypeDropper" type="Node2D"]
 script = ExtResource("1_x1y4k")
@@ -56,3 +57,9 @@ text = "Game Over!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bmg6r")
+volume_db = 10.0
+autoplay = true
+parameters/looping = true

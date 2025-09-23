@@ -125,7 +125,7 @@ func game_over():
 			child.queue_free()
 	
 	#Loading GameOver scene
-	var game_over_scene = load("res://GameOver.tscn").instantiate()
+	var game_over_scene = load("res://scenes/GameOver.tscn").instantiate()
 	game_over_scene.final_score = score
 	#game_over_scene.top_score = get_top_score() #Used later to grab top score API
 	
@@ -142,7 +142,7 @@ func decrease_life():
 
 func return_to_main_menu():
 	$SpawnTimer.stop()
-	var main_menu = load("res://MainMenu.tscn").instantiate()
+	var main_menu = load("res://scenes/MainMenu.tscn").instantiate()
 	get_tree().root.add_child(main_menu)
 	if get_tree().current_scene:
 		get_tree().current_scene.queue_free()
