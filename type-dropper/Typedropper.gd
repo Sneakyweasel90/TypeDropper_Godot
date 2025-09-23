@@ -113,6 +113,7 @@ func game_over():
 	#Loading GameOver scene
 	var game_over_scene = load("res://GameOver.tscn").instantiate()
 	game_over_scene.final_score = score
+	#game_over_scene.top_score = get_top_score() #Used later to grab top score API
 	
 	get_tree().root.add_child(game_over_scene)
 	

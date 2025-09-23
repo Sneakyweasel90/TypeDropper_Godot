@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	$ScoreLabel.text = "Your Score: %d" % final_score
-	$TopScoreLabel.text = "Top Score: %d" % top_score
+	#$TopScoreLabel.text = "Top Score: %d" % top_score #Used for later to grab leaderboard API
 
 func _on_retry_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://TypeDropper.tscn")
