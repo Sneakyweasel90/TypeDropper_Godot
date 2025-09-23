@@ -9,6 +9,7 @@ var words: Array = []
 var current_input: String = ""
 var word_speed = 80
 var current_word: Node = null # Need to track the active word with this
+var game_running: bool = true
 
 func _ready():
 	if $GameOverLabel:
@@ -54,6 +55,9 @@ func _input(event):
 				current_input = current_input.substr(0, current_input.length() - 1)
 				if $InputLabel:
 					$InputLabel.text = current_input
+		if event.keycode == Key.KEY_ESCAPE:
+			return_to_main_menu()
+			return
 		elif event.unicode != 0:
 			var typed_char = char(event.unicode).to_lower()
 			current_input += typed_char
@@ -61,13 +65,14 @@ func _input(event):
 				$InputLabel.text = current_input
 		
 		if current_word.has_method("check_word") and current_word.check_word(current_input):
-			score += 100
-			word_speed += 2
-			current_input = ""
-			if $InputLabel:
-				$InputLabel.text = ""
-			current_word = null
-			spawn_word()
+			if game_running:
+				score += 100
+				word_speed += 2
+				current_input = ""
+				if $InputLabel:
+					$InputLabel.text = ""
+				current_word = null
+				spawn_word()
 
 func _process(_delta):
 	if $ScoreLabel:
@@ -81,6 +86,8 @@ func _process(_delta):
 		game_over()
 
 func spawn_word():
+	if not game_running:
+		return
 	if not word_scene or words.is_empty():
 		return
 	var word_instance = word_scene.instantiate()
@@ -93,17 +100,35 @@ func spawn_word():
 	current_word = word_instance
 
 func game_over():
+	game_running = false
 	$SpawnTimer.stop()
 	set_process(false)
 	set_process_input(false)
 	
+	#Clear the words when lose
 	for child in get_children():
-		if child is Node2D and child.has_method("_process"):
-			child.set_process(false)
+		if child is Node2D and child.has_method("check_word"):
+			child.queue_free()
 	
-	if $GameOverLabel:
-		$GameOverLabel.text = "Game Over!\nScore: %d" % score
-		$GameOverLabel.visible = true
+	#Loading GameOver scene
+	var game_over_scene = load("res://GameOver.tscn").instantiate()
+	game_over_scene.final_score = score
+	
+	get_tree().root.add_child(game_over_scene)
+	
+	#Need to free current game scene
+	if get_tree().current_scene:
+		get_tree().current_scene.queue_free()
+	get_tree().current_scene = game_over_scene
+	
 
 func decrease_life():
 	lives -= 1
+
+func return_to_main_menu():
+	$SpawnTimer.stop()
+	var main_menu = load("res://MainMenu.tscn").instantiate()
+	get_tree().root.add_child(main_menu)
+	if get_tree().current_scene:
+		get_tree().current_scene.queue_free()
+	get_tree().current_scene = main_menu

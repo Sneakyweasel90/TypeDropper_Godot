@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckcudnkwtpimi"]
+
+[ext_resource type="Script" uid="uid://64w2gpd38ai8" path="res://GameOver.gd" id="1_a1htc"]
+[ext_resource type="Texture2D" uid="uid://bii8ld0ebkvcq" path="res://assets/gradient-toxic.jpg" id="2_eksk4"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_a1htc")
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -4.0
+offset_right = 601.0
+offset_bottom = 598.0
+texture = ExtResource("2_eksk4")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 285.0
+offset_right = 454.0
+offset_bottom = 378.0
+
+[node name="RetryBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Retry?"
+
+[node name="MainMenuBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Main Menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 63.0
+offset_right = 416.0
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 40
+text = "Game Over!"
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 173.0
+offset_right = 530.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 26
+text = "Your Score = "
+
+[connection signal="pressed" from="VBoxContainer/RetryBtn" to="." method="_on_retry_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

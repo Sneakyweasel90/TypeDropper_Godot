@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed: float = 80
+@export var speed: float
 var word: String = ""
 var typed_length: int = 0
 var wrong_index: int = -1
