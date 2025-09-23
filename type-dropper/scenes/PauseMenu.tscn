@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c74jkyyo01yaa"]
+
+[ext_resource type="Script" uid="uid://bq87yomqgdnn8" path="res://scripts/PauseMenu.gd" id="1_jvnd5"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jvnd5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 193.0
+offset_right = 436.0
+offset_bottom = 382.0
+
+[node name="PausedLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ContinueBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Continue"
+
+[node name="MainMenuBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"

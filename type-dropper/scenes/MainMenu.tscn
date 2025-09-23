@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctpm5tdrl771f"]
 
-[ext_resource type="Script" uid="uid://d1bedmqvc54pv" path="res://MainMenu.gd" id="1_h7a2f"]
-[ext_resource type="PackedScene" uid="uid://b8hgxnll1bhc8" path="res://TypeDropper.tscn" id="2_qoqlk"]
-[ext_resource type="PackedScene" uid="uid://beyiun1uybt7k" path="res://Leaderboard.tscn" id="3_iwfq2"]
+[ext_resource type="Script" uid="uid://d1bedmqvc54pv" path="res://scripts/MainMenu.gd" id="1_h7a2f"]
+[ext_resource type="PackedScene" uid="uid://b8hgxnll1bhc8" path="res://scenes/TypeDropper.tscn" id="2_qoqlk"]
+[ext_resource type="PackedScene" uid="uid://beyiun1uybt7k" path="res://scenes/Leaderboard.tscn" id="3_iwfq2"]
 [ext_resource type="Texture2D" uid="uid://bii8ld0ebkvcq" path="res://assets/gradient-toxic.jpg" id="4_qoqlk"]
 
 [node name="MainMenu" type="Control"]

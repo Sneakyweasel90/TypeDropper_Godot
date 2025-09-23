@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckcudnkwtpimi"]
 
-[ext_resource type="Script" uid="uid://64w2gpd38ai8" path="res://GameOver.gd" id="1_a1htc"]
+[ext_resource type="Script" uid="uid://64w2gpd38ai8" path="res://scripts/GameOver.gd" id="1_a1htc"]
 [ext_resource type="Texture2D" uid="uid://bii8ld0ebkvcq" path="res://assets/gradient-toxic.jpg" id="2_eksk4"]
 
 [node name="GameOver" type="Control"]
@@ -46,12 +46,13 @@ text = "Game Over!"
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 173.0
-offset_right = 530.0
-offset_bottom = 213.0
+offset_left = 140.0
+offset_top = 175.0
+offset_right = 464.0
+offset_bottom = 215.0
 theme_override_font_sizes/font_size = 26
 text = "Your Score = "
+horizontal_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/RetryBtn" to="." method="_on_retry_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

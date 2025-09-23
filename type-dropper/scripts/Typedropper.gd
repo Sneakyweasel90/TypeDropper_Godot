@@ -2,6 +2,7 @@ extends Node2D
 
 @export var word_scene: PackedScene
 @export var difficulty: String = "easy"
+@export var pause_menu_scene: PackedScene
 
 var score: int = 0
 var lives: int = 3
@@ -10,12 +11,18 @@ var current_input: String = ""
 var word_speed = 80
 var current_word: Node = null # Need to track the active word with this
 var game_running: bool = true
+var pause_menu: Node = null
 
 func _ready():
 	if $GameOverLabel:
 		$GameOverLabel.visible = false
 	if $InputLabel:
 		$InputLabel.text = ""
+		
+	if pause_menu_scene:
+		pause_menu = pause_menu_scene.instantiate()
+		add_child(pause_menu)
+		pause_menu.visible = false
 
 	var path = "res://words/%s.txt" % difficulty
 	load_words(path)
@@ -56,8 +63,15 @@ func _input(event):
 				if $InputLabel:
 					$InputLabel.text = current_input
 		if event.keycode == Key.KEY_ESCAPE:
-			return_to_main_menu()
+			if pause_menu:
+				if not pause_menu.visible:
+					pause_menu.visible = true
+					get_tree().paused = true
+				else:
+					pause_menu.visible = false
+					get_tree().visible = false
 			return
+			
 		elif event.unicode != 0:
 			var typed_char = char(event.unicode).to_lower()
 			current_input += typed_char
