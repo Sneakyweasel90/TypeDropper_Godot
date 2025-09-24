@@ -51,11 +51,12 @@ func _on_countdown_finished():
 	spawn_word()
 
 func _input(event):
-	# Escape always works
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == Key.KEY_ESCAPE and pause_menu:
 			pause_menu.visible = not pause_menu.visible
 			get_tree().paused = pause_menu.visible
+			if pause_menu.visible:
+				pause_menu.move_to_front()  # menu is on top
 			return
 
 		if not game_running:
