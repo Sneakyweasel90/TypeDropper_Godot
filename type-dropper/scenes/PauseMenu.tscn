@@ -48,6 +48,7 @@ offset_right = 242.0
 offset_bottom = 90.0
 min_value = -30.0
 max_value = 0.0
+value = -15.0
 
 [connection signal="pressed" from="VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
