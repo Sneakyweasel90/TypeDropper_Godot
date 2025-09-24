@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://d31j1y5h5acw7"]
+
+[ext_resource type="Script" uid="uid://5vto8m0h8vnj" path="res://scripts/Countdown.gd" id="1_srufn"]
+
+[node name="Countdown" type="CanvasLayer"]
+script = ExtResource("1_srufn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 573.0
+offset_top = 273.0
+offset_right = 613.0
+offset_bottom = 356.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 60
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
