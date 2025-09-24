@@ -108,7 +108,7 @@ func spawn_word():
 	var word_text = words[randi() % words.size()]
 	word_instance.word = word_text
 	word_instance.speed = word_speed
-	var x = randf_range(50, 550)
+	var x = randf_range(50, 1100)
 	word_instance.position = Vector2(x, 0)
 	add_child(word_instance)
 	current_word = word_instance

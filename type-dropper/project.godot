@@ -13,8 +13,3 @@ config_version=5
 config/name="TypeDropper"
 run/main_scene="uid://ctpm5tdrl771f"
 config/features=PackedStringArray("4.5", "Forward Plus")
-
-[display]
-
-window/size/viewport_width=600
-window/size/viewport_height=600
