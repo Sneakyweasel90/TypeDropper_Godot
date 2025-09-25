@@ -9,7 +9,7 @@ var score: int = 0
 var lives: int = 3
 var words: Array = []
 var current_input: String = ""
-var word_speed = 80
+var word_speed = 300
 var current_word: Node = null
 var game_running: bool = false
 var pause_menu: Node = null
@@ -39,6 +39,7 @@ func _ready():
 		countdown.countdown_finished.connect(_on_countdown_finished)
 	else:
 		print("No countdown scene assigned")
+
 func setup(difficulty_choice: String):
 	difficulty = difficulty_choice
 	var path = "res://words/%s.txt" % difficulty
