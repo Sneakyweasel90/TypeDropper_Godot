@@ -6,12 +6,13 @@
 script = ExtResource("1_srufn")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 573.0
-offset_top = 273.0
-offset_right = 613.0
-offset_bottom = 356.0
+offset_left = 508.0
+offset_top = 275.0
+offset_right = 649.0
+offset_bottom = 358.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 
