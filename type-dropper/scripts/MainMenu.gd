@@ -1,11 +1,10 @@
 extends Control
 
 @export var game_scene: PackedScene
+@onready var classic_modes = $VBoxContainer/ClassicBtn/VBoxContainer
 
 func _ready():
-	$VBoxContainer/EasyBtn.pressed.connect(start_game.bind("easy"))
-	$VBoxContainer/MediumBtn.pressed.connect(start_game.bind("medium"))
-	$VBoxContainer/HardBtn.pressed.connect(start_game.bind("hard"))
+	classic_modes.visible = false
 
 func start_game(difficulty: String):
 	var scene = game_scene.instantiate()
@@ -14,3 +13,9 @@ func start_game(difficulty: String):
 	if get_tree().current_scene:
 		get_tree().current_scene.queue_free()
 	get_tree().current_scene = scene
+
+func _on_classic_btn_pressed() -> void:
+	classic_modes.visible = !classic_modes.visible
+
+func _on_difficulty_btn_pressed(difficulty: String) -> void:
+	start_game(difficulty)
