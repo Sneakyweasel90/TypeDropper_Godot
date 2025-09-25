@@ -13,6 +13,12 @@ jobs:
           script: |
             const columnName = context.payload.project_card.column_name;
             const issue_number = context.payload.project_card.content_url.split('/').pop();
+            const contentUrl = context.payload.project_card.content_url;
+
+            if (!contentURL) {
+            console.log("Card is a nite, skipping...");
+            return;
+            }
 
             let label = '';
             if (columnName === "Todo") label = "green";
