@@ -14,18 +14,25 @@ var current_word: Node = null
 var game_running: bool = false
 var pause_menu: Node = null
 var countdown: Node = null
+var scene_path: String = ""
 
-# Character pools
 const EASY_CHARS = "abcdefghijklmnopqrstuvwxyz"
 const MEDIUM_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789"
 const HARD_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?"
 
 func _ready():
-	# Hide labels initially
 	if $GameOverLabel:
 		$GameOverLabel.visible = false
 	if $InputLabel:
 		$InputLabel.text = ""
+	
+	if GameState.last_difficulty != "":
+		setup(GameState.last_difficulty)
+		print(GameState.last_difficulty)
+
+	else:
+		# fallback to default if nothing is set
+		setup(difficulty)
 	
 	# Pause menu
 	if pause_menu_scene:
@@ -70,8 +77,8 @@ func _input(event):
 		if event.keycode == Key.KEY_ESCAPE and pause_menu:
 			pause_menu.visible = not pause_menu.visible
 			get_tree().paused = pause_menu.visible
-			if pause_menu.visible:
-				pause_menu.move_to_front()
+			#if pause_menu.visible:
+				#pause_menu.move_to_front()
 			return
 
 		if not game_running:
@@ -138,6 +145,7 @@ func game_over():
 	# Load GameOver scene
 	var game_over_scene = load("res://scenes/GameOver.tscn").instantiate()
 	game_over_scene.final_score = score
+	game_over_scene.previous_game_scene_path = scene_path
 	get_tree().root.add_child(game_over_scene)
 
 	# Free current game scene

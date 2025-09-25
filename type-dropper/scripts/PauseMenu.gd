@@ -1,6 +1,6 @@
-extends Control
+extends CanvasLayer
 
-@onready var sound_slider = $VBoxContainer/MusicLevel/SoundSlider
+@onready var sound_slider = $PauseMenu/VBoxContainer/MusicLevel/SoundSlider
 var config_file_path := "user://settings.cfg"
 
 func _ready():
@@ -17,8 +17,8 @@ func _ready():
 		_apply_volume(0)
 	
 func _on_continue_btn_pressed() -> void:
-	visible = false
 	get_tree().paused = false
+	visible = false
 
 func _on_main_menu_btn_pressed() -> void:
 	get_tree().paused = false
